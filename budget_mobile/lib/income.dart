@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'globals.dart';
+
 class IncomeList extends StatefulWidget {
   const IncomeList({Key? key}) : super(key: key);
 
@@ -39,10 +41,10 @@ class _IncomeListState extends State<IncomeList> {
                         // secondary: Container(
                         //   height: 50,
                         //   width: 50,
-                          // child: Image.asset(
-                          //   checkBoxListTileModel[index].img,
-                          //   fit: BoxFit.cover,
-                          // ),
+                        // child: Image.asset(
+                        //   checkBoxListTileModel[index].img,
+                        //   fit: BoxFit.cover,
+                        // ),
                         // ),
                         onChanged: (val) {
                           itemChange(val!, index);
@@ -58,6 +60,9 @@ class _IncomeListState extends State<IncomeList> {
   void itemChange(bool val, int index) {
     setState(() {
       checkBoxListTileModel[index].isCheck = val;
+      titles.add("- "+checkBoxListTileModel[index].title);
+      prices.add(1000);
+      b+=1000;
     });
   }
 }

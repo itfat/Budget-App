@@ -1,5 +1,6 @@
 import 'package:budget_mobile/globals.dart';
 import 'package:flutter/material.dart';
+import 'globals.dart';
 
 class FinalList extends StatefulWidget {
   const FinalList({ Key? key }) : super(key: key);
@@ -17,41 +18,28 @@ class _FinalListState extends State<FinalList> {
     return new Container(
       child: new ListView.builder(
         shrinkWrap: true,
-          itemCount: DisplayList.length,
+          itemCount: titles.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
               child: new Container(
                 padding: new EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
-                    new CheckboxListTile(
-                        activeColor: Colors.pink[300],
-                        dense: true,
-                        //font change
-                        title: new Text(
-                          DisplayList[index].title,
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.5),
-                        ),
-                        value: DisplayList[index].isCheck,
-                        // secondary: Container(
-                        //   height: 50,
-                        //   width: 50,
-                        //   child: Image.asset(
-                        //     DisplayList[index].img,
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        // ),
-                        onChanged: (val) {
-                          itemChange(val!, index);
-                        })
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(titles[index]),
+                      Text(prices[index].toString()),
+
+              
                     
-                  ],
+                      
+                    ],
+                  ),
                 ),
               ),
             );
           }),
     );
   }
+}

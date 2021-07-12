@@ -2,7 +2,7 @@ import 'package:budget_mobile/globals.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesList extends StatefulWidget {
-  const ExpensesList({ Key? key }) : super(key: key);
+  const ExpensesList({Key? key}) : super(key: key);
 
   @override
   _ExpensesListState createState() => _ExpensesListState();
@@ -10,14 +10,14 @@ class ExpensesList extends StatefulWidget {
 
 class _ExpensesListState extends State<ExpensesList> {
   @override
- List<CheckBoxListTileModel> checkBoxListTileModel =
+  List<CheckBoxListTileModel> checkBoxListTileModel =
       CheckBoxListTileModel.getUsers();
 
   @override
   Widget build(BuildContext context) {
     return new Container(
       child: new ListView.builder(
-        shrinkWrap: true,
+          shrinkWrap: true,
           itemCount: checkBoxListTileModel.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
@@ -48,7 +48,6 @@ class _ExpensesListState extends State<ExpensesList> {
                         onChanged: (val) {
                           itemChange(val!, index);
                         })
-                    
                   ],
                 ),
               ),
@@ -60,18 +59,26 @@ class _ExpensesListState extends State<ExpensesList> {
   void itemChange(bool val, int index) {
     setState(() {
       checkBoxListTileModel[index].isCheck = val;
-      
-      DisplayList.add(checkBoxListTileModel[index]);
+      print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+      // print(checkBoxListTileModel[index]);
+      print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+      titles.add("+ " +checkBoxListTileModel[index].title);
+      prices.add(2000);
+      a+=2000;
     });
   }
 }
+
 class CheckBoxListTileModel {
   int userId;
-  // String img;
   String title;
   bool isCheck;
 
-  CheckBoxListTileModel({required this.userId, /* required this.img, */ required this.title, required this.isCheck});
+  CheckBoxListTileModel(
+      {required this.userId,
+      /* required this.img, */ required this.title,
+      required this.isCheck});
 
   static List<CheckBoxListTileModel> getUsers() {
     return <CheckBoxListTileModel>[
