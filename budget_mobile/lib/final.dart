@@ -1,9 +1,10 @@
 import 'package:budget_mobile/globals.dart';
 import 'package:flutter/material.dart';
 import 'globals.dart';
+import 'screens/home/components/body.dart';
 
 class FinalList extends StatefulWidget {
-  const FinalList({ Key? key }) : super(key: key);
+  const FinalList({Key? key}) : super(key: key);
 
   @override
   _FinalListState createState() => _FinalListState();
@@ -11,13 +12,11 @@ class FinalList extends StatefulWidget {
 
 class _FinalListState extends State<FinalList> {
   @override
-
-
-  @override
+  BodyState state = BodyState();
   Widget build(BuildContext context) {
     return new Container(
       child: new ListView.builder(
-        shrinkWrap: true,
+          shrinkWrap: true,
           itemCount: titles.length,
           itemBuilder: (BuildContext context, int index) {
             return new Card(
@@ -28,12 +27,9 @@ class _FinalListState extends State<FinalList> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
+                      Container(child: icons[index]),
                       Text(titles[index]),
                       Text(prices[index].toString()),
-
-              
-                    
-                      
                     ],
                   ),
                 ),

@@ -5,25 +5,39 @@ import 'package:budget_mobile/bottom.dart';
 import '../../../final.dart';
 import '../../../globals.dart';
 
-
-
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   const Body({Key? key}) : super(key: key);
 
   @override
+  BodyState createState() => BodyState();
+}
+
+class BodyState extends State<Body> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-        child: Column(
-      children: [
-        SingleChildScrollView(
-          child: Card(
+        child: SingleChildScrollView(
+      child: Column(
+        children: [
+          Card(
+              color: Colors.pink[50],
+              elevation: 80,
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Total Income:$a"), Text("Total Expenses: $b")],
-          )),
-        ),
-        FinalList(),
-      ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Total Income:$b",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    "Total Expenses: $a",
+                    style: TextStyle(fontSize: 16),
+                  )
+                ],
+              )),
+          FinalList(),
+        ],
+      ),
     ));
   }
 }

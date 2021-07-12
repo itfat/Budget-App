@@ -1,8 +1,7 @@
-import 'package:budget_mobile/expenses.dart';
-import 'package:budget_mobile/final.dart';
-
+import 'package:flutter/material.dart';
 
 List <int> prices = [];
 List<String> titles = [];
-int a=0;
-int b=0;
+List <CircleAvatar> icons = [];
+var a=0.0;
+var b=0.0;

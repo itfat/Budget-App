@@ -1,3 +1,4 @@
+import 'package:budget_mobile/app_icons.dart';
 import 'package:flutter/material.dart';
 
 import 'globals.dart';
@@ -10,10 +11,11 @@ class IncomeList extends StatefulWidget {
 }
 
 class _IncomeListState extends State<IncomeList> {
-  @override
+  final _formKey = GlobalKey<FormState>();
+  bool once = false;
   List<CheckBoxListTileModel> checkBoxListTileModel =
       CheckBoxListTileModel.getUsers();
-
+  var prix;
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -23,9 +25,8 @@ class _IncomeListState extends State<IncomeList> {
           itemBuilder: (BuildContext context, int index) {
             return new Card(
               child: new Container(
-                padding: new EdgeInsets.all(10.0),
-                child: Column(
-                  children: <Widget>[
+                  padding: new EdgeInsets.all(10.0),
+                  child: Column(children: <Widget>[
                     new CheckboxListTile(
                         activeColor: Colors.pink[300],
                         dense: true,
@@ -38,31 +39,113 @@ class _IncomeListState extends State<IncomeList> {
                               letterSpacing: 0.5),
                         ),
                         value: checkBoxListTileModel[index].isCheck,
-                        // secondary: Container(
-                        //   height: 50,
-                        //   width: 50,
-                        // child: Image.asset(
-                        //   checkBoxListTileModel[index].img,
-                        //   fit: BoxFit.cover,
-                        // ),
-                        // ),
                         onChanged: (val) {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                    content: Stack(
+                                  overflow: Overflow.visible,
+                                  children: <Widget>[
+                                    Positioned(
+                                      right: -40.0,
+                                      top: -40.0,
+                                      child: InkResponse(
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: CircleAvatar(
+                                          child: Icon(Icons.close),
+                                          backgroundColor: Colors.pink,
+                                        ),
+                                      ),
+                                    ),
+                                    Form(
+                                      key: _formKey,
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: EdgeInsets.all(8.0),
+                                            child: getPrice(),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: RaisedButton(
+                                              child: Text("Submit"),
+                                              onPressed: () {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  _formKey.currentState!.save();
+                                                  Navigator.of(context).pop();
+                                                }
+                                              },
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ));
+                              });
                           itemChange(val!, index);
                         })
-                  ],
-                ),
-              ),
+                  ])),
             );
           }),
+    );
+  }
+
+  getPrice() {
+    return TextFormField(
+      keyboardType: TextInputType.number,
+      onSaved: (newValue) {
+        setState(() {
+          if (once) {
+            prix = int.parse(newValue!);
+            assert(prix is int);
+            print(prix);
+            prices.add(prix);
+            b += prix;
+            once = false;
+          }
+        });
+      },
+      validator: (value) {
+        if (value!.isEmpty) return "Price can not be empty";
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "Price",
+        focusColor: Colors.pink,
+        hintText: "Enter Price",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+      ),
     );
   }
 
   void itemChange(bool val, int index) {
     setState(() {
       checkBoxListTileModel[index].isCheck = val;
-      titles.add("- "+checkBoxListTileModel[index].title);
-      prices.add(1000);
-      b+=1000;
+      if (checkBoxListTileModel[index].isCheck == true &&
+          !titles.contains(checkBoxListTileModel[index].title)) {
+        once = true;
+        print("Price is+++++++++++++++++++++++++++++++++" + prix.toString());
+        titles.add(checkBoxListTileModel[index].title);
+        icons.add(
+          CircleAvatar(
+            radius: 10,
+            child: Icon(
+              MyFlutterApp.plus,
+              size: 14,
+            ),
+            backgroundColor: Colors.green,
+          ),
+        );
+      }
     });
   }
 }
