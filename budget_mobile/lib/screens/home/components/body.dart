@@ -21,7 +21,7 @@ class BodyState extends State<Body> {
         children: [
           Card(
               color: Colors.pink[50],
-              elevation: 80,
+              elevation: 1000,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

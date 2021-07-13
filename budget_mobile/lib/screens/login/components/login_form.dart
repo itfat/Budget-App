@@ -96,7 +96,7 @@ class _LoginFormState extends State<LoginForm> {
                 primary: Colors.pink, //button's fill color
                 shadowColor: Colors.black, //specify the button's elevation color
                 elevation: 4.0, //buttons Material shadow
-                minimumSize: Size(300,
+                minimumSize: Size(100,
                     40), //specify the button's first: width and second: height
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(

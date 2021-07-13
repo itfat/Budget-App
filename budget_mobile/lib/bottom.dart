@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'enums.dart';
 import 'expenses.dart';
 import 'income.dart';
+
 class TutorialOverlay1 extends ModalRoute<void> {
   @override
   Duration get transitionDuration => Duration(milliseconds: 500);
@@ -19,10 +20,10 @@ class TutorialOverlay1 extends ModalRoute<void> {
   bool get maintainState => true;
   @override
   Widget buildPage(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      ) {
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     // This makes sure that text and other content follows the material style
     return Material(
       type: MaterialType.transparency,
@@ -39,10 +40,40 @@ class TutorialOverlay1 extends ModalRoute<void> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-           ExpensesList(),
-             RaisedButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Done'),)
+            ExpensesList(),
+            ElevatedButton(
+              child: Text(
+                "Done",
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink, //button's fill color
+                shadowColor:
+                    Colors.black, //specify the button's elevation color
+                elevation: 4.0, //buttons Material shadow
+                minimumSize: Size(100,
+                    40), //specify the button's first: width and second: height
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        35.0)), // set the buttons shape. Make its birders rounded etc
+                enabledMouseCursor: MouseCursor
+                    .defer, //used to construct ButtonStyle.mouseCursor
+                disabledMouseCursor: MouseCursor
+                    .uncontrolled, //used to construct ButtonStyle.mouseCursor
+                visualDensity: VisualDensity(
+                    horizontal: 0.0,
+                    vertical: 0.0), //set the button's visual density
+                tapTargetSize: MaterialTapTargetSize
+                    .padded, // set the MaterialTapTarget size. can set to: values, padded and shrinkWrap properties
+                animationDuration: Duration(
+                    milliseconds: 100), //the buttons animations duration
+                enableFeedback: true, //to set the feedback to true or false
+                alignment: Alignment.center, //set the button's child Alignment
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
@@ -50,8 +81,8 @@ class TutorialOverlay1 extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,
@@ -62,6 +93,7 @@ class TutorialOverlay1 extends ModalRoute<void> {
     );
   }
 }
+
 class TutorialOverlay2 extends ModalRoute<void> {
   @override
   Duration get transitionDuration => Duration(milliseconds: 500);
@@ -77,10 +109,10 @@ class TutorialOverlay2 extends ModalRoute<void> {
   bool get maintainState => true;
   @override
   Widget buildPage(
-      BuildContext context,
-      Animation<double> animation,
-      Animation<double> secondaryAnimation,
-      ) {
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+  ) {
     // This makes sure that text and other content follows the material style
     return Material(
       type: MaterialType.transparency,
@@ -98,10 +130,39 @@ class TutorialOverlay2 extends ModalRoute<void> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             IncomeList(),
-           RaisedButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text('Done'),
-          )
+            ElevatedButton(
+              child: Text(
+                "Done",
+                style: TextStyle(color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink, //button's fill color
+                shadowColor:
+                    Colors.black, //specify the button's elevation color
+                elevation: 4.0, //buttons Material shadow
+                minimumSize: Size(100,
+                    40), //specify the button's first: width and second: height
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(
+                        35.0)), // set the buttons shape. Make its birders rounded etc
+                enabledMouseCursor: MouseCursor
+                    .defer, //used to construct ButtonStyle.mouseCursor
+                disabledMouseCursor: MouseCursor
+                    .uncontrolled, //used to construct ButtonStyle.mouseCursor
+                visualDensity: VisualDensity(
+                    horizontal: 0.0,
+                    vertical: 0.0), //set the button's visual density
+                tapTargetSize: MaterialTapTargetSize
+                    .padded, // set the MaterialTapTarget size. can set to: values, padded and shrinkWrap properties
+                animationDuration: Duration(
+                    milliseconds: 100), //the buttons animations duration
+                enableFeedback: true, //to set the feedback to true or false
+                alignment: Alignment.center, //set the button's child Alignment
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
@@ -109,8 +170,8 @@ class TutorialOverlay2 extends ModalRoute<void> {
   }
 
   @override
-  Widget buildTransitions(
-      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
     // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,
@@ -121,20 +182,22 @@ class TutorialOverlay2 extends ModalRoute<void> {
     );
   }
 }
+
 class CustomBottom extends StatefulWidget {
   @override
   _CustomBottomState createState() => _CustomBottomState();
 }
 
 class _CustomBottomState extends State<CustomBottom> {
-    void _showOverlayExpenses(BuildContext context) {
+  void _showOverlayExpenses(BuildContext context) {
     Navigator.of(context).push(TutorialOverlay1());
   }
+
   void _showOverlayIncome(BuildContext context) {
     Navigator.of(context).push(TutorialOverlay2());
   }
-  @override
 
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14),
@@ -164,7 +227,6 @@ class _CustomBottomState extends State<CustomBottom> {
                   ),
                   onPressed: () {
                     _showOverlayExpenses(context);
-
                   }),
               IconButton(
                   icon: SvgPicture.asset(
@@ -172,7 +234,7 @@ class _CustomBottomState extends State<CustomBottom> {
                     color: Colors.pink,
                   ),
                   onPressed: () {
-                     _showOverlayIncome(context);
+                    _showOverlayIncome(context);
                   }),
             ],
           )),
