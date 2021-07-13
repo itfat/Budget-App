@@ -11,8 +11,9 @@ class FinalList extends StatefulWidget {
 }
 
 class _FinalListState extends State<FinalList> {
+  
   @override
-  BodyState state = BodyState();
+  
   Widget build(BuildContext context) {
     return new Container(
       child: new ListView.builder(

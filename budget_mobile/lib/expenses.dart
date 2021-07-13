@@ -1,4 +1,6 @@
+import 'package:budget_mobile/final.dart';
 import 'package:budget_mobile/globals.dart';
+import 'package:budget_mobile/screens/home/components/body.dart';
 import 'package:flutter/material.dart';
 import 'app_icons.dart';
 
@@ -114,6 +116,7 @@ class _ExpensesListState extends State<ExpensesList> {
                                                     .validate()) {
                                                   _formKey.currentState!.save();
                                                   Navigator.of(context).pop();
+                                                  // fstate.setState(() {});
                                                 }
                                               },
                                             ),

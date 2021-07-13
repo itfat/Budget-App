@@ -1,8 +1,5 @@
-import 'package:budget_mobile/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
-
-import '../../../no_account.dart';
-
+import '../../../have_account.dart';
 
 // Form Error
 final RegExp emailValidatorRegExp =
@@ -16,95 +13,95 @@ const String kNamelNullError = "Please Enter your name";
 const String kPhoneNumberNullError = "Please Enter your phone number";
 const String kAddressNullError = "Please Enter your address";
 
-class LoginForm extends StatefulWidget {
+class SignUpForm extends StatefulWidget {
   @override
-  _LoginFormState createState() => _LoginFormState();
+  _SignUpFormState createState() => _SignUpFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   late String email;
   late String password;
   late String errorText;
+  late String conform_password;
 
-
+  bool circular = false;
+  bool remember = false;
 
   final List<String> errors = [];
 
   @override
   void initState() {
     super.initState();
+    // autoSignUp();
   }
 
-  void addError({String? error}) {
+  void addError({required String error}) {
     if (!errors.contains(error))
       setState(() {
-        errors.add(error!);
+        errors.add(error);
       });
   }
 
-  void removeError({String? error}) {
+  void removeError({required String error}) {
     if (errors.contains(error))
       setState(() {
         errors.remove(error);
       });
   }
-// login()async{
-//   await Firebase.initializeApp();
 
-//   try {
-//     print(email);
-//     print(password);
-//   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//     email: email,
-//     password: password
-//   );
-//   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'user-not-found') {
-//     print('No user found for that email.');
-//   } else if (e.code == 'wrong-password') {
-//     print('Wrong password provided for that user.');
-//   }
-// }
-// }
-  
+  // signUp() async {
+  //   await Firebase.initializeApp();
+  //   try {
+  //     UserCredential userCredential = await FirebaseAuth.instance
+  //         .createUserWithEmailAndPassword(email: email, password: password);
+  //     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+  //   } on FirebaseAuthException catch (e) {
+  //     print('No user found for that email.');
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      // key: _formKey,
+      key: _formKey,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-             buildEmailFormField(),
-         
+            buildEmailFormField(),
+
             SizedBox(height: 20),
-             buildPasswordFormField(),
-            
+            buildPasswordFormField(),
+
             SizedBox(height: 20),
             // FormError(errors: errors),
+            confirmPasswordFormField(),
+
+            SizedBox(height: 20),
+
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, HomeScreen.routename);
-              
+                // signUp();
+                // Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
               },
               child: Text(
-                'Login',
+                'SignUp',
                 style: TextStyle(color: Colors.white),
               ),
               style: ElevatedButton.styleFrom(
                 primary: Colors.pink, //button's fill color
-                shadowColor: Colors.black, //specify the button's elevation color
+                shadowColor:
+                    Colors.black, //specify the button's elevation color
                 elevation: 4.0, //buttons Material shadow
                 minimumSize: Size(100,
                     40), //specify the button's first: width and second: height
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         35.0)), // set the buttons shape. Make its birders rounded etc
-                enabledMouseCursor:
-                    MouseCursor.defer, //used to construct ButtonStyle.mouseCursor
+                enabledMouseCursor: MouseCursor
+                    .defer, //used to construct ButtonStyle.mouseCursor
                 disabledMouseCursor: MouseCursor
                     .uncontrolled, //used to construct ButtonStyle.mouseCursor
                 visualDensity: VisualDensity(
@@ -112,14 +109,14 @@ class _LoginFormState extends State<LoginForm> {
                     vertical: 0.0), //set the button's visual density
                 tapTargetSize: MaterialTapTargetSize
                     .padded, // set the MaterialTapTarget size. can set to: values, padded and shrinkWrap properties
-                animationDuration:
-                    Duration(milliseconds: 100), //the buttons animations duration
+                animationDuration: Duration(
+                    milliseconds: 100), //the buttons animations duration
                 enableFeedback: true, //to set the feedback to true or false
                 alignment: Alignment.center, //set the button's child Alignment
               ),
             ),
             SizedBox(height: 20),
-            NoAccountText(),
+            HaveAccountText(),
           ],
         ),
       ),
@@ -133,7 +130,7 @@ class _LoginFormState extends State<LoginForm> {
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.length >= 8) {
+        } else if (value.length <= 8) {
           removeError(error: kShortPassError);
         }
         password = value;
@@ -155,6 +152,39 @@ class _LoginFormState extends State<LoginForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+      ),
+    );
+  }
+
+  TextFormField confirmPasswordFormField() {
+    return TextFormField(
+      obscureText: true,
+      onSaved: (newValue) => conform_password = newValue!,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kPassNullError);
+        } else if (value.isNotEmpty && password != conform_password) {
+          removeError(error: kMatchPassError);
+        }
+        conform_password = value;
+      },
+      validator: (value) {
+        if (value!.isEmpty) {
+          addError(error: kPassNullError);
+          return "";
+        } else if ((password != value)) {
+          addError(error: kMatchPassError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "Confirm Password",
+        focusColor: Colors.grey,
+        hintText: "Re-enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -195,9 +225,6 @@ class _LoginFormState extends State<LoginForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        // suffixIcon: CustomSurffixIcon(
-        //   svgIcon: "assets/icons/Mail.svg",
-        // ),
       ),
     );
   }
