@@ -146,11 +146,11 @@ class _LoginFormState extends State<LoginForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.pink,
-          ),
-        ),
+        // focusedBorder: OutlineInputBorder(
+        //   borderSide: BorderSide(
+        //     color: Colors.pink,
+        //   ),
+        // ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -188,11 +188,14 @@ class _LoginFormState extends State<LoginForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.pink,
-          ),
-        ),
+
+        // focusedBorder: OutlineInputBorder(
+
+        // borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        // borderSide: BorderSide(
+        //   color: Colors.pink,
+        // ),
+        // ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,

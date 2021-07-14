@@ -148,11 +148,11 @@ class _SignUpFormState extends State<SignUpForm> {
           // If  you are using latest version of flutter then lable text and hint text shown like this
           // if you r using flutter less then 1.20.* then maybe this is not working properly
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: Colors.pink,
-            ),
-          ),
+          // focusedBorder: OutlineInputBorder(
+          //   borderSide: BorderSide(
+          //     color: Colors.pink,
+          //   ),
+          // ),
         ));
   }
 
@@ -183,11 +183,11 @@ class _SignUpFormState extends State<SignUpForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.pink,
-          ),
-        ),
+        // focusedBorder: OutlineInputBorder(
+        //   borderSide: BorderSide(
+        //     color: Colors.pink,
+        //   ),
+        // ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -224,11 +224,11 @@ class _SignUpFormState extends State<SignUpForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.pink,
-          ),
-        ),
+        // focusedBorder: OutlineInputBorder(
+        //   borderSide: BorderSide(
+        //     color: Colors.pink,
+        //   ),
+        // ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
