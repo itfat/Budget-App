@@ -1,8 +1,9 @@
 import 'package:budget_mobile/screens/home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../../../no_account.dart';
-
 
 // Form Error
 final RegExp emailValidatorRegExp =
@@ -27,8 +28,6 @@ class _LoginFormState extends State<LoginForm> {
   late String password;
   late String errorText;
 
-
-
   final List<String> errors = [];
 
   @override
@@ -49,26 +48,24 @@ class _LoginFormState extends State<LoginForm> {
         errors.remove(error);
       });
   }
-// login()async{
-//   await Firebase.initializeApp();
 
-//   try {
-//     print(email);
-//     print(password);
-//   UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//     email: email,
-//     password: password
-//   );
-//   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'user-not-found') {
-//     print('No user found for that email.');
-//   } else if (e.code == 'wrong-password') {
-//     print('Wrong password provided for that user.');
-//   }
-// }
-// }
-  
+  login() async {
+    await Firebase.initializeApp();
+
+    try {
+      print(email);
+      print(password);
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacementNamed(context, HomeScreen.routename);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +75,16 @@ class _LoginFormState extends State<LoginForm> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-             buildEmailFormField(),
-         
+            buildEmailFormField(),
+
             SizedBox(height: 20),
-             buildPasswordFormField(),
-            
+            buildPasswordFormField(),
+
             SizedBox(height: 20),
             // FormError(errors: errors),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, HomeScreen.routename);
-              
+                login();
               },
               child: Text(
                 'Login',
@@ -96,15 +92,16 @@ class _LoginFormState extends State<LoginForm> {
               ),
               style: ElevatedButton.styleFrom(
                 primary: Colors.pink, //button's fill color
-                shadowColor: Colors.black, //specify the button's elevation color
+                shadowColor:
+                    Colors.black, //specify the button's elevation color
                 elevation: 4.0, //buttons Material shadow
                 minimumSize: Size(100,
                     40), //specify the button's first: width and second: height
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(
                         35.0)), // set the buttons shape. Make its birders rounded etc
-                enabledMouseCursor:
-                    MouseCursor.defer, //used to construct ButtonStyle.mouseCursor
+                enabledMouseCursor: MouseCursor
+                    .defer, //used to construct ButtonStyle.mouseCursor
                 disabledMouseCursor: MouseCursor
                     .uncontrolled, //used to construct ButtonStyle.mouseCursor
                 visualDensity: VisualDensity(
@@ -112,8 +109,8 @@ class _LoginFormState extends State<LoginForm> {
                     vertical: 0.0), //set the button's visual density
                 tapTargetSize: MaterialTapTargetSize
                     .padded, // set the MaterialTapTarget size. can set to: values, padded and shrinkWrap properties
-                animationDuration:
-                    Duration(milliseconds: 100), //the buttons animations duration
+                animationDuration: Duration(
+                    milliseconds: 100), //the buttons animations duration
                 enableFeedback: true, //to set the feedback to true or false
                 alignment: Alignment.center, //set the button's child Alignment
               ),

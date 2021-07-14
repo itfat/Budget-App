@@ -1,3 +1,6 @@
+import 'package:budget_mobile/screens/login/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import '../../../have_account.dart';
 
@@ -50,17 +53,17 @@ class _SignUpFormState extends State<SignUpForm> {
       });
   }
 
-  // signUp() async {
-  //   await Firebase.initializeApp();
-  //   try {
-  //     UserCredential userCredential = await FirebaseAuth.instance
-  //         .createUserWithEmailAndPassword(email: email, password: password);
-  //     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-  //   } on FirebaseAuthException catch (e) {
-  //     print('No user found for that email.');
-  //     print(e);
-  //   }
-  // }
+  signUp() async {
+    await Firebase.initializeApp();
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacementNamed(context, LoginScreen.routename);
+    } on FirebaseAuthException catch (e) {
+      print('No user found for that email.');
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +86,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
             ElevatedButton(
               onPressed: () {
-                // signUp();
+                signUp();
                 // Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
               },
               child: Text(
