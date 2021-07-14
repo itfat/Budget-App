@@ -1,7 +1,21 @@
+import 'package:budget_mobile/screens/login/login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomeDrawer extends StatelessWidget {
+class HomeDrawer extends StatefulWidget {
+ 
+
   const HomeDrawer({Key? key}) : super(key: key);
+
+  @override
+  _HomeDrawerState createState() => _HomeDrawerState();
+}
+
+class _HomeDrawerState extends State<HomeDrawer> {
+ _signOut() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacementNamed(context, LoginScreen.routename);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +93,7 @@ class HomeDrawer extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               onTap: () {
+                _signOut();
                 // Update the state of the app.
                 // ...
               },

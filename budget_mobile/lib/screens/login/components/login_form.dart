@@ -3,19 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
+import '../../../form_errors.dart';
 import '../../../no_account.dart';
-
-// Form Error
-final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Please Enter your email";
-const String kInvalidEmailError = "Please Enter Valid Email";
-const String kPassNullError = "Please Enter your password";
-const String kShortPassError = "Password is too short";
-const String kMatchPassError = "Passwords don't match";
-const String kNamelNullError = "Please Enter your name";
-const String kPhoneNumberNullError = "Please Enter your phone number";
-const String kAddressNullError = "Please Enter your address";
 
 class LoginForm extends StatefulWidget {
   @override
@@ -70,21 +60,25 @@ class _LoginFormState extends State<LoginForm> {
   @override
   Widget build(BuildContext context) {
     return Form(
-      // key: _formKey,
+      key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             buildEmailFormField(),
-
             SizedBox(height: 20),
             buildPasswordFormField(),
-
             SizedBox(height: 20),
-            // FormError(errors: errors),
+            FormError(
+              errors: errors,
+            ),
             ElevatedButton(
               onPressed: () {
-                login();
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  print(errors);
+                  login();
+                }
               },
               child: Text(
                 'Login',
@@ -152,6 +146,11 @@ class _LoginFormState extends State<LoginForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.pink,
+          ),
+        ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -189,6 +188,11 @@ class _LoginFormState extends State<LoginForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.pink,
+          ),
+        ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,

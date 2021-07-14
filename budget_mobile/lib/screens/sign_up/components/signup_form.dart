@@ -1,20 +1,10 @@
+import 'package:budget_mobile/form_errors.dart';
 import 'package:budget_mobile/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import '../../../constants.dart';
 import '../../../have_account.dart';
-
-// Form Error
-final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-const String kEmailNullError = "Please Enter your email";
-const String kInvalidEmailError = "Please Enter Valid Email";
-const String kPassNullError = "Please Enter your password";
-const String kShortPassError = "Password is too short";
-const String kMatchPassError = "Passwords don't match";
-const String kNamelNullError = "Please Enter your name";
-const String kPhoneNumberNullError = "Please Enter your phone number";
-const String kAddressNullError = "Please Enter your address";
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -53,7 +43,7 @@ class _SignUpFormState extends State<SignUpForm> {
       });
   }
 
-  signUp() async {
+  _signUp() async {
     await Firebase.initializeApp();
     try {
       UserCredential userCredential = await FirebaseAuth.instance
@@ -70,24 +60,22 @@ class _SignUpFormState extends State<SignUpForm> {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
             buildEmailFormField(),
-
             SizedBox(height: 20),
             buildPasswordFormField(),
-
             SizedBox(height: 20),
-            // FormError(errors: errors),
             confirmPasswordFormField(),
-
+            FormError(errors: errors),
             SizedBox(height: 20),
-
             ElevatedButton(
               onPressed: () {
-                signUp();
-                // Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  _signUp();
+                }
               },
               child: Text(
                 'SignUp',
@@ -118,7 +106,9 @@ class _SignUpFormState extends State<SignUpForm> {
                 alignment: Alignment.center, //set the button's child Alignment
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(
+              height: 30,
+            ),
             HaveAccountText(),
           ],
         ),
@@ -128,38 +118,42 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      obscureText: true,
-      onSaved: (newValue) => password = newValue!,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
-        } else if (value.length <= 8) {
-          removeError(error: kShortPassError);
-        }
-        password = value;
+        obscureText: true,
+        onSaved: (newValue) => password = newValue!,
+        onChanged: (value) {
+          if (value.isNotEmpty) {
+            removeError(error: kPassNullError);
+          } else if (value.length <= 8) {
+            removeError(error: kShortPassError);
+          }
+          password = value;
 
-        return null;
-      },
-      validator: (value) {
-        if (value!.isEmpty) {
-          addError(error: kPassNullError);
-          return "";
-        } else if (value.length < 8) {
-          addError(error: kShortPassError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        hintText: "Password",
-        hintStyle: TextStyle(color: Colors.grey),
-        filled: true,
-        fillColor: Colors.white,
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
-    );
+          return null;
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            addError(error: kPassNullError);
+            return "";
+          } else if (value.length < 8) {
+            addError(error: kShortPassError);
+            return "";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Password",
+          hintStyle: TextStyle(color: Colors.grey),
+          filled: true,
+          fillColor: Colors.white,
+          // If  you are using latest version of flutter then lable text and hint text shown like this
+          // if you r using flutter less then 1.20.* then maybe this is not working properly
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.pink,
+            ),
+          ),
+        ));
   }
 
   TextFormField confirmPasswordFormField() {
@@ -185,13 +179,18 @@ class _SignUpFormState extends State<SignUpForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Confirm Password",
-        focusColor: Colors.grey,
-        hintText: "Re-enter your password",
+        hintText: "Re-Enter Password",
+        hintStyle: TextStyle(color: Colors.grey),
+        filled: true,
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.pink,
+          ),
+        ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        // suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }
@@ -225,6 +224,11 @@ class _SignUpFormState extends State<SignUpForm> {
         hintStyle: TextStyle(color: Colors.grey),
         filled: true,
         fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.pink,
+          ),
+        ),
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,

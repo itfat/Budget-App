@@ -1,3 +1,4 @@
+import 'package:budget_mobile/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'routes.dart';
@@ -14,8 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
 
-      // theme: theme(),
-      // home: SplashScreen(),
+      theme: theme(),
       // We use routeName so that we dont need to remember the name
       initialRoute: LoginScreen.routename,
       routes: routes,
