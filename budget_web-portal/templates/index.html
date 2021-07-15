@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Datastore and Firebase Auth Example</title>
+    <link rel="shortcut icon" href="#">
+    <script>
+        if (typeof firebase === 'undefined') {
+            const msg = "Please paste the Firebase initialization snippet into index.html. See https://console.firebase.google.com > Overview > Add Firebase to your web app.";
+            console.log(msg);
+            alert(msg);
+        }
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.4.0/firebase-ui-auth.css" />
+</head>
+
+<body>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyDbXcneCoxs2Ar79fzLGA-et11xOeO7iPI",
+            authDomain: "budget-fb40b.firebaseapp.com",
+            projectId: "budget-fb40b",
+            storageBucket: "budget-fb40b.appspot.com",
+            messagingSenderId: "665876796564",
+            appId: "1:665876796564:web:6da1f95abef16083329081",
+            measurementId: "G-Y3HYVZQ6YP"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <h1>Datastore and Firebase Auth Example</h1>
+
+    <div id="firebaseui-auth-container"></div>
+
+    <button id="sign-out">Sign Out</button>
+
+    <div id="login-info">
+        <h2>Login info:</h2>
+        {% if user_data %}
+        <dl>
+            <dt>Email</dt>
+            <dd>{{ user_data['email'] }}</dd>
+            <dt>Last 10 visits</dt>
+            <dd>
+                {% for time in times %}
+                <p>{{ time['timestamp'] }}</p>
+                {% endfor %}
+            </dd>
+        </dl>
+        {% elif error_message %}
+        <p>Error: {{ error_message }}</p>
+        {% endif %}
+    </div>
+    <!-- [END gae_python3_auth_firebase_html] -->
+    <!-- [END gae_python38_auth_firebase_html] -->
+</body>
+
+</html>
