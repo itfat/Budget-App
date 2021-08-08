@@ -1,6 +1,7 @@
 import 'package:budget_mobile/income.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_mobile/bottom.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../final.dart';
 import '../../../globals.dart';
@@ -13,6 +14,18 @@ class Body extends StatefulWidget {
 }
 
 class BodyState extends State<Body> {
+  @override
+  void initState() {
+    super.initState();
+    getMoney();
+  }
+
+  getMoney() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var a = prefs.getDouble("a");
+    var b = prefs.getDouble("b");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(

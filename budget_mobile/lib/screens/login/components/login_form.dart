@@ -1,6 +1,8 @@
 import 'package:budget_mobile/screens/home/home_screen.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -22,7 +24,7 @@ class _LoginFormState extends State<LoginForm> {
 
   @override
   void initState() {
-    super.initState();
+    super.initState(); 
   }
 
   void addError({String? error}) {
@@ -45,10 +47,21 @@ class _LoginFormState extends State<LoginForm> {
     try {
       print(email);
       print(password);
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
-      Navigator.pushReplacementNamed(context, HomeScreen.routename);
-    } on FirebaseAuthException catch (e) {
+    //   UserCredential userCredential = await FirebaseAuth.instance
+    //       .signInWithEmailAndPassword(email: email, password: password);
+    //   Navigator.pushReplacementNamed(context, HomeScreen.routename);
+    // } 
+    
+
+    
+
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    }
+    on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {

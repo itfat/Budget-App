@@ -2,6 +2,7 @@ import 'package:budget_mobile/final.dart';
 import 'package:budget_mobile/globals.dart';
 import 'package:budget_mobile/screens/home/components/body.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'app_icons.dart';
 
 class ExpensesList extends StatefulWidget {
@@ -15,6 +16,23 @@ class _ExpensesListState extends State<ExpensesList> {
   @override
   final _formKey = GlobalKey<FormState>();
   bool once = false;
+  @override
+  void initState() {
+    super.initState();
+    sumMoney();
+  }
+
+  sumMoney() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble("a", a);
+  }
+
+  addStringToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("titles", titles);
+    // prefs.setInt("prices", );
+  }
+
   List<CheckBoxListTileModel> checkBoxListTileModel =
       CheckBoxListTileModel.getUsers();
   var prix;

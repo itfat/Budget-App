@@ -1,5 +1,6 @@
 import 'package:budget_mobile/app_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'globals.dart';
 
@@ -15,6 +16,11 @@ class _IncomeListState extends State<IncomeList> {
   bool once = false;
   List<CheckBoxListTileModel> checkBoxListTileModel =
       CheckBoxListTileModel.getUsers();
+  sumMoney() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setDouble("b", b);
+  }
+
   var prix;
   @override
   Widget build(BuildContext context) {
