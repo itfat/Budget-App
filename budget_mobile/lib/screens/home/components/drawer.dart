@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:budget_mobile/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 
 class HomeDrawer extends StatefulWidget {
- 
-
   const HomeDrawer({Key? key}) : super(key: key);
 
   @override
@@ -12,7 +13,26 @@ class HomeDrawer extends StatefulWidget {
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
- _signOut() async{
+  late String name;
+  late String email;
+  late String photoUrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _userProfile();
+  }
+
+  _userProfile() {
+    var user = FirebaseAuth.instance.currentUser;
+
+    name = user.displayName;
+    email = user.email;
+    photoUrl = user.photoURL;
+    print(name);
+  }
+
+  _signOut() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacementNamed(context, LoginScreen.routename);
   }
@@ -36,15 +56,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 new CircleAvatar(
                   radius: 50.0,
                   // backgroundColor: const Color(0xFF778899),
-                  backgroundImage: AssetImage(
-                    "assets/images/logo.jpg",
+                  backgroundImage: NetworkImage(
+                   photoUrl.toString(),
+
                     // fit: BoxFit.cover,
                   ), //For Image Asset
                 ),
-
-                // ),
                 Text(
-                  'Profile',
+                  "Hi",
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ],
@@ -53,7 +72,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           Card(
             child: ListTile(
               title: Text(
-                'Follow Us',
+                name,
                 style: TextStyle(fontSize: 16),
               ),
               onTap: () {
@@ -65,19 +84,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           Card(
             child: ListTile(
               title: Text(
-                'Share',
-                style: TextStyle(fontSize: 16),
-              ),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text(
-                'Rate Us',
+                email,
                 style: TextStyle(fontSize: 16),
               ),
               onTap: () {
