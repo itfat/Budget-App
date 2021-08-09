@@ -96,7 +96,7 @@ class _SignUpFormState extends State<SignUpForm> {
                       _showPicker(context);
                     },
                     icon: Icon(Icons.upload_file),
-                    label: Text('Upload Cnic')),
+                    label: Text('Upload Pic')),
               ),
               ElevatedButton(
                 onPressed: () {

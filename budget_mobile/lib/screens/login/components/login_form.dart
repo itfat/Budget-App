@@ -47,10 +47,10 @@ class _LoginFormState extends State<LoginForm> {
     try {
       print(email);
       print(password);
-    //   UserCredential userCredential = await FirebaseAuth.instance
-    //       .signInWithEmailAndPassword(email: email, password: password);
-    //   Navigator.pushReplacementNamed(context, HomeScreen.routename);
-    // } 
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      Navigator.pushReplacementNamed(context, HomeScreen.routename);
+    } 
     
 
     
@@ -60,7 +60,7 @@ class _LoginFormState extends State<LoginForm> {
     // if a user forgets to sign out.
     // ...
     // New sign-in will be persisted with session persistence.
-    }
+    
     on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
