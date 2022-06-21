@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "665876796564",
+    "firebase_url": "https://budget-fb40b-default-rtdb.firebaseio.com",
     "project_id": "budget-fb40b",
     "storage_bucket": "budget-fb40b.appspot.com"
   },
@@ -9,7 +10,36 @@
       "client_info": {
         "mobilesdk_app_id": "1:665876796564:android:766fbd96593352dd329081",
         "android_client_info": {
-          "package_name": "com.example.budget_mobile"
+          "package_name": "com.company.budget_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "665876796564-s1rs253tvuefhjtflr8rdajcehnkn6s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBA2-pdFNsH32ESLTDEfFNKrj5ckBLqNUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "665876796564-s1rs253tvuefhjtflr8rdajcehnkn6s3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:665876796564:android:72634d228a870958329081",
+        "android_client_info": {
+          "package_name": "com.example.bb"
         }
       },
       "oauth_client": [

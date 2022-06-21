@@ -1,3 +1,4 @@
+import 'package:bb/firebase_options.dart';
 import 'package:bb/services/auth/auth_exception.dart';
 import 'package:bb/services/auth/auth_provider.dart';
 import 'package:bb/services/auth/auth_user.dart';
@@ -99,7 +100,7 @@ class FirebaseAuthProvider implements AuthProvider {
   @override
   Future<void> initialize() async {
     await Firebase.initializeApp(
-      // options: defaultFirebaseAppName.codeUnits
+      options: DefaultFirebaseOptions.currentPlatform,
     );
   }
 
