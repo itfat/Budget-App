@@ -1,7 +1,7 @@
+import 'package:bb/auth/auth_exception.dart';
+import 'package:bb/auth/auth_provider.dart';
+import 'package:bb/auth/auth_user.dart';
 import 'package:bb/firebase_options.dart';
-import 'package:bb/services/auth/auth_exception.dart';
-import 'package:bb/services/auth/auth_provider.dart';
-import 'package:bb/services/auth/auth_user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 

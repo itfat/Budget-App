@@ -1,9 +1,6 @@
 import 'package:bb/constants/routes.dart';
+import 'package:bb/create_update_expenses.dart';
 import 'package:bb/helpers/loading/loading_screen.dart';
-import 'package:bb/services/auth/bloc/auth_bloc.dart';
-import 'package:bb/services/auth/bloc/auth_event.dart';
-import 'package:bb/services/auth/bloc/auth_state.dart';
-import 'package:bb/services/auth/firebase_auth_provider.dart';
 import 'package:bb/themes/theme.dart';
 import 'package:bb/views/forgot_password_view.dart';
 import 'package:bb/views/login_view.dart';
@@ -28,10 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: BlocProvider<AuthBloc>(
-        create: (context) => AuthBloc(FirebaseAuthProvider()),
-        child: const HomePage(),
-      ),
+      home: const CreateUpdateExpenseView(),
       routes: {
         createOrUpdateNoteRoute: (context) => const CreateUpdateNoteView(),
       },
@@ -39,39 +33,39 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+// class HomePage extends StatelessWidget {
+//   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    context.read<AuthBloc>().add(const AuthEventInitialize());
-    return BlocConsumer<AuthBloc, AuthState>(
-      listener: (context, state) {
-        if (state.isLoading) {
-          LoadingScreen().show(
-              context: context,
-              text: state.loadingText ?? "Please wait a moment!");
-        } else {
-          LoadingScreen().hide();
-        }
-      },
-      builder: (context, state) {
-        if (state is AuthStateLoggedIn) {
-          return const NotesView();
-        } else if (state is AuthStateNeedsVerification) {
-          return const VerifyEmailView();
-        } else if (state is AuthStateLoggedOut) {
-          return const LoginView();
-        } else if (state is AuthStateForgotPassword) {
-          return const ForgotPasswordView();
-        } else if (state is AuthStateRegistering) {
-          return const RegisterView();
-        } else {
-          return const Scaffold(
-            body: CircularProgressIndicator(),
-          );
-        }
-      },
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     context.read<AuthBloc>().add(const AuthEventInitialize());
+//     return BlocConsumer<AuthBloc, AuthState>(
+//       listener: (context, state) {
+//         if (state.isLoading) {
+//           LoadingScreen().show(
+//               context: context,
+//               text: state.loadingText ?? "Please wait a moment!");
+//         } else {
+//           LoadingScreen().hide();
+//         }
+//       },
+//       builder: (context, state) {
+//         if (state is AuthStateLoggedIn) {
+//           return const NotesView();
+//         } else if (state is AuthStateNeedsVerification) {
+//           return const VerifyEmailView();
+//         } else if (state is AuthStateLoggedOut) {
+//           return const LoginView();
+//         } else if (state is AuthStateForgotPassword) {
+//           return const ForgotPasswordView();
+//         } else if (state is AuthStateRegistering) {
+//           return const RegisterView();
+//         } else {
+//           return const Scaffold(
+//             body: CircularProgressIndicator(),
+//           );
+//         }
+//       },
+//     );
+//   }
+// }

@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:budget_mobile/screens/login/login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';

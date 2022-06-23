@@ -51,7 +51,7 @@ class _IncomeListState extends State<IncomeList> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                     content: Stack(
-                                  overflow: Overflow.visible,
+                                  // overflow: Overflow.visible,
                                   children: <Widget>[
                                     Positioned(
                                       right: -40.0,

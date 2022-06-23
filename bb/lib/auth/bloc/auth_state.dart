@@ -1,4 +1,4 @@
-import 'package:bb/services/auth/auth_user.dart';
+import 'package:bb/auth/auth_user.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 

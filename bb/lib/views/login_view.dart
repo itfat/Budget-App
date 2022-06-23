@@ -1,7 +1,7 @@
-import 'package:bb/services/auth/auth_exception.dart';
-import 'package:bb/services/auth/bloc/auth_bloc.dart';
-import 'package:bb/services/auth/bloc/auth_event.dart';
-import 'package:bb/services/auth/bloc/auth_state.dart';
+import 'package:bb/auth/auth_exception.dart';
+import 'package:bb/auth/bloc/auth_bloc.dart';
+import 'package:bb/auth/bloc/auth_event.dart';
+import 'package:bb/auth/bloc/auth_state.dart';
 import 'package:bb/utilities/dialogs/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

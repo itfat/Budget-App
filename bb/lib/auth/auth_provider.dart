@@ -1,5 +1,5 @@
-import 'package:bb/services/auth/auth_user.dart';
 
+import 'package:bb/auth/auth_user.dart';
 
 abstract class AuthProvider {
   Future<void> initialize();
